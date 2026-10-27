@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Spud House – Loaded Comfort Food | Dayton, OH</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --black: #0C0C0C;
+  --dark: #141414;
+  --card: #1A1A1A;
+  --charcoal: #222222;
+  --orange: #E8630A;
+  --orange-dark: #C4520A;
+  --orange-light: #FF7A1A;
+  --yellow: #F5C518;
+  --cream: #FAF5EC;
+  --warm: #F0E8D5;
+  --muted: #7A7060;
+  --border: rgba(232,99,10,0.15);
+  --white: #FFFFFF;
+}
+
+html { scroll-behavior: smooth; }
+body { background: var(--black); color: var(--cream); font-family: 'Barlow', sans-serif; font-weight: 300; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+
+/* ── TOP BAR ── */
+.top-bar {
+  background: var(--orange);
+  padding: 0.6rem 2rem;
+  text-align: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: white;
+}
+.top-bar span { color: var(--yellow); }
+
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(12,12,12,0.97);
+  backdrop-filter: blur(16px);
+  border-bottom: 2px solid var(--orange);
+  padding: 0 3rem; height: 62px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem;
+  letter-spacing: 0.06em;
+  color: var(--cream);
+  line-height: 1;
+}
+.nav-logo span { color: var(--orange); }
+.nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+.nav-links a { text-decoration: none; font-family: 'Barlow Condensed', sans-serif; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(250,245,236,0.5); transition: color 0.2s; }
+.nav-links a:hover { color: var(--orange); }
+.nav-cta { background: var(--orange) !important; color: white !important; padding: 0.5rem 1.3rem; font-weight: 700 !important; transition: background 0.2s !important; }
+.nav-cta:hover { background: var(--orange-dark) !important; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+}
+
+.hero-left {
+  background: var(--dark);
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 5rem 4.5rem;
+  position: relative; overflow: hidden;
+}
+
+.hero-left::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 0% 100%, rgba(232,99,10,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 100% 0%, rgba(245,197,24,0.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Diagonal stripe texture */
+.hero-left::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(
+    -55deg,
+    rgba(232,99,10,0.03) 0px, rgba(232,99,10,0.03) 1px,
+    transparent 1px, transparent 12px
+  );
+  pointer-events: none;
+}
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 0.7rem;
+  margin-bottom: 1.5rem;
+  opacity: 0; animation: fadeUp 0.6s forwards 0.2s;
+}
+.hero-badge-chip {
+  background: var(--orange);
+  color: white;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 0.3rem 0.8rem;
+}
+.hero-badge-text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.68rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(250,245,236,0.45);
+}
+
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(4.5rem, 8vw, 9rem);
+  letter-spacing: 0.02em;
+  line-height: 0.88;
+  opacity: 0; animation: fadeUp 0.9s forwards 0.3s;
+}
+.hero-title .line-orange { color: var(--orange); }
+.hero-title .line-yellow { color: var(--yellow); font-size: 0.45em; letter-spacing: 0.18em; }
+
+.hero-sub {
+  font-size: 1rem; line-height: 1.8;
+  color: rgba(250,245,236,0.6);
+  margin-top: 1.8rem; max-width: 380px;
+  opacity: 0; animation: fadeUp 0.9s forwards 0.5s;
+}
+
+.hero-ctas {
+  display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp 0.9s forwards 0.65s;
+}
+
+.btn-orange {
+  background: var(--orange); color: white;
+  padding: 1rem 2.2rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.88rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  text-decoration: none; transition: all 0.25s; display: inline-block;
+}
+.btn-orange:hover { background: var(--orange-dark); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(232,99,10,0.4); }
+
+.btn-ghost {
+  border: 2px solid rgba(250,245,236,0.2); color: var(--cream);
+  padding: 1rem 2.2rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.88rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  text-decoration: none; transition: all 0.25s; display: inline-block; background: transparent;
+}
+.btn-ghost:hover { border-color: var(--orange); color: var(--orange); }
+
+.hero-stats {
+  display: flex; gap: 2.5rem; margin-top: 3.5rem; padding-top: 2.5rem;
+  border-top: 1px solid rgba(250,245,236,0.06); flex-wrap: wrap;
+  opacity: 0; animation: fadeUp 0.9s forwards 0.8s;
+}
+.stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; letter-spacing: 0.04em; color: var(--orange); line-height: 1; }
+.stat-label { font-family: 'Barlow Condensed', sans-serif; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(250,245,236,0.35); margin-top: 0.2rem; }
+
+/* Hero Right */
+.hero-right {
+  background: var(--charcoal); position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.hero-right-glow {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 60% at 50% 60%, rgba(232,99,10,0.2) 0%, transparent 65%);
+}
+.hero-right-content { position: relative; z-index: 2; text-align: center; padding: 4rem 3rem; }
+.hero-emoji { font-size: 11rem; line-height: 1; margin-bottom: 1.5rem; filter: drop-shadow(0 0 50px rgba(232,99,10,0.5)); animation: gentlePulse 4s ease-in-out infinite; }
+.hero-review-card {
+  background: rgba(250,245,236,0.04); border: 1px solid rgba(232,99,10,0.2);
+  border-left: 3px solid var(--orange); padding: 1.5rem 1.8rem; text-align: left; margin-bottom: 1.2rem;
+}
+.hero-review-text { font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-style: italic; color: rgba(250,245,236,0.8); line-height: 1.6; }
+.hero-review-attr { font-family: 'Barlow Condensed', sans-serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--orange); margin-top: 0.7rem; }
+.hero-location {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: rgba(232,99,10,0.12); border: 1px solid rgba(232,99,10,0.25);
+  padding: 0.65rem 1.4rem;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(250,245,236,0.65);
+}
+
+/* ── FIRE STRIP ── */
+.fire-strip {
+  background: var(--orange);
+  padding: 0.85rem 4rem;
+  display: flex; justify-content: center; align-items: center; gap: 3rem; flex-wrap: wrap;
+  position: relative; overflow: hidden;
+}
+.fire-strip::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(90deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 50px);
+}
+.fire-item {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.92); display: flex; align-items: center; gap: 0.4rem; position: relative; z-index: 1;
+}
+
+/* ── MENU ── */
+.menu-section { padding: 7rem 4rem; max-width: 1300px; margin: 0 auto; }
+.section-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--orange);
+  display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.7rem;
+}
+.section-label::before { content: ''; width: 22px; height: 2px; background: var(--orange); }
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 6vw, 6rem);
+  letter-spacing: 0.03em; line-height: 0.92; margin-bottom: 3.5rem;
+}
+.section-title span { color: var(--orange); }
+
+.menu-tabs { display: flex; gap: 0; border-bottom: 1px solid rgba(250,245,236,0.06); margin-bottom: 3rem; overflow-x: auto; }
+.menu-tab {
+  padding: 0.8rem 2rem;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(250,245,236,0.35); cursor: pointer;
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+  transition: all 0.2s; background: none; border-top: none; border-left: none; border-right: none; white-space: nowrap;
+}
+.menu-tab.active { color: var(--orange); border-bottom-color: var(--orange); }
+.menu-tab:hover { color: var(--cream); }
+
+.menu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: rgba(250,245,236,0.05); }
+.menu-card {
+  background: var(--dark); padding: 2rem 2.2rem;
+  display: flex; justify-content: space-between; align-items: flex-start; gap: 1.5rem;
+  transition: background 0.2s; position: relative; overflow: hidden;
+}
+.menu-card::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+  background: var(--orange); transform: scaleY(0); transition: transform 0.3s; transform-origin: bottom;
+}
+.menu-card:hover { background: var(--charcoal); }
+.menu-card:hover::before { transform: scaleY(1); }
+.menu-card-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.1rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--cream); margin-bottom: 0.3rem;
+}
+.menu-card-desc { font-size: 0.82rem; color: rgba(250,245,236,0.45); line-height: 1.6; font-weight: 300; }
+.menu-card-tag {
+  display: inline-block; margin-top: 0.5rem;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--orange); border: 1px solid rgba(232,99,10,0.35); padding: 0.15rem 0.5rem;
+}
+.menu-card-price {
+  font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.04em;
+  color: var(--yellow); white-space: nowrap; flex-shrink: 0;
+}
+
+/* ── HOW IT WORKS ── */
+.how-section { background: var(--dark); padding: 7rem 4rem; border-top: 1px solid rgba(250,245,236,0.04); border-bottom: 1px solid rgba(250,245,236,0.04); }
+.how-inner { max-width: 1300px; margin: 0 auto; }
+.how-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(250,245,236,0.04); margin-top: 4rem; }
+.how-step { background: var(--dark); padding: 2.8rem 2.2rem; position: relative; transition: background 0.25s; }
+.how-step:hover { background: var(--charcoal); }
+.step-num {
+  font-family: 'Bebas Neue', sans-serif; font-size: 5rem; letter-spacing: 0.04em;
+  color: rgba(232,99,10,0.08); line-height: 1; margin-bottom: 1rem;
+}
+.step-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+.step-title {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--cream); margin-bottom: 0.5rem;
+}
+.step-desc { font-size: 0.82rem; color: rgba(250,245,236,0.4); line-height: 1.7; font-weight: 300; }
+
+/* ── WHY US ── */
+.why-section { padding: 7rem 4rem; max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 7rem; align-items: center; }
+.why-text p { font-size: 0.95rem; line-height: 1.9; color: rgba(250,245,236,0.55); margin-bottom: 1rem; }
+.why-highlight { border-left: 3px solid var(--orange); padding: 1.2rem 1.5rem; background: rgba(232,99,10,0.06); margin: 1.5rem 0; }
+.why-highlight p { font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; font-style: italic; color: rgba(250,245,236,0.85) !important; line-height: 1.6; margin: 0 !important; }
+.why-features { display: flex; flex-direction: column; gap: 1px; background: rgba(250,245,236,0.04); }
+.why-feat { background: var(--dark); padding: 1.8rem 2.2rem; display: flex; gap: 1.5rem; align-items: flex-start; transition: background 0.25s; }
+.why-feat:hover { background: var(--charcoal); }
+.why-feat-icon { font-size: 1.6rem; flex-shrink: 0; }
+.why-feat-title { font-family: 'Barlow Condensed', sans-serif; font-size: 0.95rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cream); margin-bottom: 0.2rem; }
+.why-feat-desc { font-size: 0.8rem; color: rgba(250,245,236,0.4); line-height: 1.6; font-weight: 300; }
+
+/* ── ORDER CTA ── */
+.order-section { background: var(--orange); padding: 5rem 4rem; text-align: center; position: relative; overflow: hidden; }
+.order-section::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(-45deg, rgba(0,0,0,0.06) 0px, rgba(0,0,0,0.06) 10px, transparent 10px, transparent 20px); }
+.order-inner { position: relative; z-index: 2; max-width: 700px; margin: 0 auto; }
+.order-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 6vw, 6rem); letter-spacing: 0.04em; color: white; line-height: 0.95; margin-bottom: 0.8rem; }
+.order-sub { font-size: 1rem; color: rgba(255,255,255,0.8); margin-bottom: 2.5rem; font-weight: 300; }
+.btn-black { background: var(--black); color: white; padding: 1.1rem 3rem; font-family: 'Barlow Condensed', sans-serif; font-size: 0.9rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; transition: all 0.25s; display: inline-block; }
+.btn-black:hover { background: var(--dark); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
+
+/* ── HOURS ── */
+.info-section { padding: 7rem 4rem; max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 7rem; align-items: start; }
+.hours-list { margin-top: 2rem; }
+.hours-row { display: flex; justify-content: space-between; align-items: center; padding: 0.9rem 0; border-bottom: 1px solid rgba(250,245,236,0.06); font-size: 0.88rem; }
+.hours-day { font-family: 'Barlow Condensed', sans-serif; letter-spacing: 0.06em; color: rgba(250,245,236,0.4); font-weight: 500; text-transform: uppercase; }
+.hours-time { font-family: 'Barlow Condensed', sans-serif; letter-spacing: 0.06em; color: var(--cream); font-weight: 700; text-transform: uppercase; }
+.c-label { font-family: 'Barlow Condensed', sans-serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--orange); margin-bottom: 0.3rem; }
+.c-val { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 0.04em; color: var(--cream); margin-bottom: 1.8rem; }
+.c-val a { color: var(--cream); text-decoration: none; }
+.c-val a:hover { color: var(--orange); }
+
+/* ── FOOTER ── */
+footer { background: var(--dark); border-top: 2px solid var(--orange); padding: 4rem 4rem 2rem; }
+.footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 5rem; max-width: 1300px; margin: 0 auto; padding-bottom: 3rem; border-bottom: 1px solid rgba(250,245,236,0.06); }
+.footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 0.06em; color: var(--cream); line-height: 1; }
+.footer-logo span { color: var(--orange); }
+.footer-tagline { font-family: 'Barlow Condensed', sans-serif; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--orange); margin-bottom: 1rem; font-weight: 600; }
+.footer-desc { font-size: 0.83rem; color: rgba(250,245,236,0.35); line-height: 1.8; font-weight: 300; }
+.footer-col-title { font-family: 'Barlow Condensed', sans-serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--orange); margin-bottom: 1.2rem; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+.footer-links a { text-decoration: none; font-size: 0.82rem; color: rgba(250,245,236,0.35); transition: color 0.2s; font-weight: 300; }
+.footer-links a:hover { color: var(--cream); }
+.footer-bottom { max-width: 1300px; margin: 0 auto; padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(250,245,236,0.15); flex-wrap: wrap; gap: 1rem; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes gentlePulse { 0%, 100% { filter: drop-shadow(0 0 30px rgba(232,99,10,0.3)); } 50% { filter: drop-shadow(0 0 70px rgba(232,99,10,0.7)); } }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) { .how-steps { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 900px) {
+  nav { padding: 0 1.5rem; }
+  .nav-links { display: none; }
+  .hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-left { padding: 5rem 1.5rem 3rem; }
+  .hero-right { height: 320px; }
+  .fire-strip { padding: 0.8rem 1.5rem; gap: 1.5rem; }
+  .menu-section, .how-section, .info-section, .order-section { padding: 5rem 1.5rem; }
+  .why-section { padding: 5rem 1.5rem; grid-template-columns: 1fr; gap: 3rem; }
+  .menu-grid { grid-template-columns: 1fr; }
+  .how-steps { grid-template-columns: 1fr; }
+  .info-section { grid-template-columns: 1fr; gap: 3rem; }
+  .footer-top { grid-template-columns: 1fr; gap: 2.5rem; }
+  footer { padding: 3rem 1.5rem 2rem; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  🔥 Order Online · Pickup & Delivery Available · <span>Open Mon–Sat 10AM–10PM · Sun 12PM–8PM</span>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">THE <span>SPUD</span> HOUSE</div>
+  <ul class="nav-links">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#hours">Hours</a></li>
+    <li><a href="#order" class="nav-cta">Order Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-badge">
+      <span class="hero-badge-chip">Dayton, OH</span>
+      <span class="hero-badge-text">4125 W Third St · Fresh Made to Order</span>
+    </div>
+    <h1 class="hero-title">
+      LOADED.<br>
+      <span class="line-orange">BOLD.</span><br>
+      <span class="line-yellow">COMFORT FOOD.</span>
+    </h1>
+    <p class="hero-sub">Gourmet loaded potatoes, crispy fries, wings, and sandwiches made fresh to order with high-quality ingredients. This is not your average fast food. This is The Spud House.</p>
+    <div class="hero-ctas">
+      <a href="#order" class="btn-orange">Order Now</a>
+      <a href="#menu" class="btn-ghost">See the Menu</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">100%</div><div class="stat-label">Fresh Made to Order</div></div>
+      <div><div class="stat-num">12+</div><div class="stat-label">Loaded Potato Builds</div></div>
+      <div><div class="stat-num">Fast</div><div class="stat-label">Pickup & Delivery</div></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-right-glow"></div>
+    <div class="hero-right-content">
+      <div class="hero-emoji">🥔</div>
+      <div class="hero-review-card">
+        <div class="hero-review-text">"Finally — loaded potatoes done RIGHT. Customizable, fresh, and absolutely loaded. The Spud House hits different. This is comfort food on another level."</div>
+        <div class="hero-review-attr">⭐⭐⭐⭐⭐ Dayton Customer</div>
+      </div>
+      <div class="hero-location">📍 4125 W Third St · Dayton, OH 45417</div>
+    </div>
+  </div>
+</section>
+
+<!-- FIRE STRIP -->
+<div class="fire-strip">
+  <div class="fire-item">🥔 Loaded Potatoes</div>
+  <div class="fire-item">🍟 Gourmet Fries</div>
+  <div class="fire-item">🍗 Crispy Wings</div>
+  <div class="fire-item">🥪 Sandwiches</div>
+  <div class="fire-item">🧀 Loaded Sides</div>
+  <div class="fire-item">🚗 Fast Pickup & Delivery</div>
+</div>
+
+<!-- MENU -->
+<section class="menu-section" id="menu">
+  <div class="section-label">The Menu</div>
+  <h2 class="section-title">BUILD YOUR<br><span>PERFECT SPUD.</span></h2>
+  <div class="menu-tabs">
+    <button class="menu-tab active" onclick="switchTab(this)">Loaded Potatoes</button>
+    <button class="menu-tab" onclick="switchTab(this)">Wings</button>
+    <button class="menu-tab" onclick="switchTab(this)">Fries & Sides</button>
+    <button class="menu-tab" onclick="switchTab(this)">Sandwiches</button>
+  </div>
+  <div class="menu-grid" id="menu-grid">
+    <div class="menu-card">
+      <div><div class="menu-card-name">The Classic Spud</div><div class="menu-card-desc">Loaded baked potato with butter, sour cream, cheddar, bacon, and chives. The one that started it all.</div><span class="menu-card-tag">Best Seller</span></div>
+      <div class="menu-card-price">$10</div>
+    </div>
+    <div class="menu-card">
+      <div><div class="menu-card-name">BBQ Brisket Spud</div><div class="menu-card-desc">Smoked brisket, BBQ sauce, cheddar, crispy onions, pickled jalapeños. Bold, smoky, loaded.</div><span class="menu-card-tag">Fan Favorite</span></div>
+      <div class="menu-card-price">$13</div>
+    </div>
+    <div class="menu-card">
+      <div><div class="menu-card-name">Buffalo Chicken Spud</div><div class="menu-card-desc">Crispy buffalo chicken, ranch drizzle, cheddar, green onions, celery crumble. Heat meets comfort.</div></div>
+      <div class="menu-card-price">$12</div>
+    </div>
+    <div class="menu-card">
+      <div><div class="menu-card-name">Loaded Cheese Spud</div><div class="menu-card-desc">Triple cheese blend, bacon crumbles, sour cream, chives. Maximum cheese. Zero regrets.</div><span class="menu-card-tag">Cheese Lovers</span></div>
+      <div class="menu-card-price">$11</div>
+    </div>
+    <div class="menu-card">
+      <div><div class="menu-card-name">Philly Spud</div><div class="menu-card-desc">Shaved ribeye, sautéed peppers and onions, provolone, garlic aioli. A Philly cheesesteak on a spud.</div></div>
+      <div class="menu-card-price">$14</div>
+    </div>
+    <div class="menu-card">
+      <div><div class="menu-card-name">Build Your Own Spud</div><div class="menu-card-desc">Start with a fresh baked potato and choose your protein, toppings, and sauce. Your spud, your way.</div><span class="menu-card-tag">Fully Custom</span></div>
+      <div class="menu-card-price">$9+</div>
+    </div>
+    <div class="menu-card">
+      <div><div class="menu-card-name">Veggie Spud</div><div class="menu-card-desc">Roasted peppers, mushrooms, spinach, tomato, cheddar, herb aioli. Fresh, hearty, satisfying.</div><span class="menu-card-tag">Vegetarian</span></div>
+      <div class="menu-card-price">$10</div>
+    </div>
+    <div class="menu-card">
+      <div><div class="menu-card-name">Breakfast Spud</div><div class="menu-card-desc">Scrambled eggs, bacon or sausage, cheddar, gravy. Breakfast done the Spud House way.</div><span class="menu-card-tag">Morning Fave</span></div>
+      <div class="menu-card-price">$11</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how">
+  <div class="how-inner">
+    <div class="section-label">How It Works</div>
+    <h2 class="section-title">FRESH. <span>FAST.</span><br>LOADED.</h2>
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="step-num">01</div>
+        <span class="step-icon">📱</span>
+        <div class="step-title">Order Online or Call</div>
+        <div class="step-desc">Place your order on our site or call us. Every order is made fresh when you order — no sitting under a heat lamp.</div>
+      </div>
+      <div class="how-step">
+        <div class="step-num">02</div>
+        <span class="step-icon">🥔</span>
+        <div class="step-title">We Build It Fresh</div>
+        <div class="step-desc">Every spud, every fry, every wing is made to order with high-quality ingredients. No shortcuts, no compromises.</div>
+      </div>
+      <div class="how-step">
+        <div class="step-num">03</div>
+        <span class="step-icon">🚗</span>
+        <div class="step-title">Pick Up or Get Delivery</div>
+        <div class="step-desc">Swing by and grab your order or get it delivered straight to your door. Fast, hot, and exactly how you ordered it.</div>
+      </div>
+      <div class="how-step">
+        <div class="step-num">04</div>
+        <span class="step-icon">🔥</span>
+        <div class="step-title">Eat. Repeat.</div>
+        <div class="step-desc">Once you've had a Spud House loaded potato, you'll be back. Every single time. That's a guarantee.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why-section">
+  <div class="why-text">
+    <div class="section-label">Why The Spud House</div>
+    <h2 class="section-title" style="font-size:clamp(2.5rem,5vw,5rem)">NOT YOUR<br><span>AVERAGE</span><br>SPOT.</h2>
+    <p>The Spud House was built for people who are tired of settling. Tired of dry, sad baked potatoes. Tired of basic fast food. Tired of paying good money for mediocre ingredients.</p>
+    <div class="why-highlight"><p>"Bold, loaded comfort food made fresh to order — with a focus on customizable, high-quality ingredients. This is what fast food was always supposed to be."</p></div>
+    <p>Located right here in Dayton on W Third Street. Open 6 days a week for lunch and dinner. Order online to skip the line.</p>
+  </div>
+  <div class="why-features">
+    <div class="why-feat"><div class="why-feat-icon">🌿</div><div><div class="why-feat-title">High-Quality Ingredients</div><div class="why-feat-desc">No frozen shortcuts. Everything is fresh and sourced with quality in mind.</div></div></div>
+    <div class="why-feat"><div class="why-feat-icon">⚙️</div><div><div class="why-feat-title">Fully Customizable</div><div class="why-feat-desc">Build your own spud exactly how you want it — protein, toppings, sauce, all your call.</div></div></div>
+    <div class="why-feat"><div class="why-feat-icon">⚡</div><div><div class="why-feat-title">Made Fresh to Order</div><div class="why-feat-desc">Every single item is made when you order it. Fresh every time, no exceptions.</div></div></div>
+    <div class="why-feat"><div class="why-feat-icon">📍</div><div><div class="why-feat-title">Right Here in Dayton</div><div class="why-feat-desc">Your city. Your comfort food. 4125 W Third St — pickup or delivery, your choice.</div></div></div>
+  </div>
+</section>
+
+<!-- ORDER CTA -->
+<section class="order-section" id="order">
+  <div class="order-inner">
+    <h2 class="order-title">STOP READING.<br>START EATING.</h2>
+    <p class="order-sub">Order online for pickup or delivery. Made fresh the moment you order.</p>
+    <a href="https://thespudshouse.com" target="_blank" class="btn-black">Order Online Now →</a>
+  </div>
+</section>
+
+<!-- HOURS & INFO -->
+<section class="info-section" id="hours">
+  <div>
+    <div class="section-label">Hours</div>
+    <h2 class="section-title" style="font-size:clamp(2.5rem,4vw,4.5rem)">WE'RE<br><span>OPEN.</span></h2>
+    <div class="hours-list">
+      <div class="hours-row"><span class="hours-day">Monday – Saturday</span><span class="hours-time">10:00 AM – 10:00 PM</span></div>
+      <div class="hours-row"><span class="hours-day">Sunday</span><span class="hours-time">12:00 PM – 8:00 PM</span></div>
+    </div>
+    <p style="font-size:0.75rem;color:rgba(250,245,236,0.25);margin-top:1rem;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.06em;text-transform:uppercase">Order online to skip the line</p>
+  </div>
+  <div>
+    <div class="section-label">Find Us</div>
+    <h2 class="section-title" style="font-size:clamp(2.5rem,4vw,4.5rem)">COME<br><span>GET IT.</span></h2>
+    <div>
+      <div class="c-label">Address</div>
+      <div class="c-val">4125 W Third St<br>Dayton, OH 45417</div>
+      <div class="c-label">Order Online</div>
+      <div class="c-val"><a href="https://thespudshouse.com" target="_blank">thespudshouse.com</a></div>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap">
+        <a href="https://thespudshouse.com" target="_blank" class="btn-orange" style="font-size:0.82rem">Order Online →</a>
+        <a href="https://maps.google.com/?q=4125+W+Third+St+Dayton+OH+45417" target="_blank" class="btn-ghost" style="font-size:0.82rem">Get Directions</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">THE <span>SPUD</span> HOUSE</div>
+      <div class="footer-tagline">Loaded Comfort Food · Dayton, OH</div>
+      <p class="footer-desc">Bold, loaded comfort food made fresh to order. Gourmet loaded potatoes, crispy fries, wings, and sandwiches with high-quality customizable ingredients — right here in Dayton.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Menu</div>
+      <ul class="footer-links">
+        <li><a href="#menu">Loaded Potatoes</a></li>
+        <li><a href="#menu">Wings</a></li>
+        <li><a href="#menu">Fries & Sides</a></li>
+        <li><a href="#menu">Sandwiches</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Visit</div>
+      <ul class="footer-links">
+        <li><a href="#hours">Hours & Location</a></li>
+        <li><a href="#how">How It Works</a></li>
+        <li><a href="#order">Order Online</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2026 The Spud House · 4125 W Third St, Dayton OH 45417</div>
+    <div>Mon–Sat 10AM–10PM · Sun 12PM–8PM</div>
+  </div>
+</footer>
+
+<script>
+function switchTab(el) {
+  document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  const tab = el.textContent.trim();
+  const grid = document.getElementById('menu-grid');
+  const menus = {
+    'Loaded Potatoes': [
+      ["The Classic Spud","Butter, sour cream, cheddar, bacon, chives. The one that started it all.","Best Seller","$10"],
+      ["BBQ Brisket Spud","Smoked brisket, BBQ sauce, cheddar, crispy onions, pickled jalapeños.","Fan Favorite","$13"],
+      ["Buffalo Chicken Spud","Crispy buffalo chicken, ranch drizzle, cheddar, green onions, celery crumble.","","$12"],
+      ["Loaded Cheese Spud","Triple cheese blend, bacon crumbles, sour cream, chives. Maximum cheese.","Cheese Lovers","$11"],
+      ["Philly Spud","Shaved ribeye, sautéed peppers and onions, provolone, garlic aioli.","","$14"],
+      ["Build Your Own Spud","Choose your protein, toppings, and sauce. Your spud, your way.","Fully Custom","$9+"],
+      ["Veggie Spud","Roasted peppers, mushrooms, spinach, tomato, cheddar, herb aioli.","Vegetarian","$10"],
+      ["Breakfast Spud","Scrambled eggs, bacon or sausage, cheddar, gravy. Breakfast done right.","Morning Fave","$11"],
+    ],
+    'Wings': [
+      ["Classic Wings","Crispy wings tossed in your choice of sauce. Served with ranch or blue cheese.","","$12"],
+      ["Buffalo Wings","Hot buffalo sauce, crispy outside, juicy inside. The classic done right.","Best Seller","$12"],
+      ["Honey Garlic Wings","Sweet honey glaze, roasted garlic, hint of heat. Sticky, bold, addictive.","Fan Favorite","$13"],
+      ["BBQ Wings","Smoky house BBQ sauce. Rich, saucy, finger-licking.","","$12"],
+      ["Lemon Pepper Wings","Dry rub lemon pepper — crispy, tangy, impossible to stop eating.","","$12"],
+      ["Spud House Signature Wings","Our house blend dry rub — the recipe we don't share. Try it to understand.","House Special","$14"],
+      ["Boneless Wings","All the flavor, none of the bones. Tossed in your choice of sauce.","","$11"],
+      ["Wing Combo","8 wings + loaded fries + drink. The full Spud House experience.","Best Value","$18"],
+    ],
+    'Fries & Sides': [
+      ["Loaded Cheese Fries","Crispy fries, triple cheese sauce, bacon, jalapeños, sour cream.","Best Seller","$8"],
+      ["Classic Crispy Fries","Fresh cut, double fried, perfectly seasoned. The best fries in Dayton.","","$5"],
+      ["Seasoned Waffle Fries","Golden waffle fries with Spud House seasoning blend.","","$6"],
+      ["BBQ Brisket Fries","Fries topped with smoked brisket, BBQ sauce, cheddar, crispy onions.","Fan Favorite","$11"],
+      ["Buffalo Chicken Fries","Crispy buffalo chicken over fries with ranch and cheddar.","","$10"],
+      ["Mac & Cheese Bites","House mac & cheese, breaded and fried. Crispy outside, creamy inside.","","$7"],
+      ["Onion Rings","Hand-battered thick-cut onion rings. Crispy, sweet, perfect.","","$6"],
+      ["Coleslaw","House-made creamy coleslaw. Fresh cut daily.","","$3"],
+    ],
+    'Sandwiches': [
+      ["Spud House Burger","House blend beef patty, cheddar, lettuce, tomato, onion, special sauce.","","$11"],
+      ["Buffalo Chicken Sandwich","Crispy chicken, buffalo sauce, ranch slaw, pickles, brioche bun.","Fan Favorite","$12"],
+      ["BBQ Brisket Sandwich","Smoked brisket, house BBQ, pickled jalapeños, crispy onions, brioche.","","$13"],
+      ["Philly Cheesesteak","Shaved ribeye, peppers, onions, provolone, garlic aioli on a hoagie roll.","","$13"],
+      ["Grilled Chicken Club","Grilled chicken, bacon, avocado, lettuce, tomato, swiss, honey mustard.","","$12"],
+      ["Veggie Sandwich","Roasted peppers, mushrooms, spinach, avocado, herb aioli. Fresh and hearty.","Vegetarian","$10"],
+      ["Fish Sandwich","Crispy fried fish, tartar sauce, lettuce, tomato. Simple and perfect.","","$11"],
+      ["Combo Meal","Any sandwich + fries + drink. The full meal deal.","Best Value","$15"],
+    ]
+  };
+  const items = menus[tab] || menus['Loaded Potatoes'];
+  grid.innerHTML = items.map(([name,desc,tag,price]) => `
+    <div class="menu-card">
+      <div>
+        <div class="menu-card-name">${name}</div>
+        <div class="menu-card-desc">${desc}</div>
+        ${tag ? `<span class="menu-card-tag">${tag}</span>` : ''}
+      </div>
+      <div class="menu-card-price">${price}</div>
+    </div>
+  `).join('');
+}
+</script>
+</body>
+</html>
